@@ -9,6 +9,52 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
 
     <style>
+      body {
+        position: absolute;
+        top: 0; bottom: 0; left: 0; right: 0;
+        background-color: #f2f2f2;
+      }
+
+      .title {
+        color: #52644a;
+      }
+
+      .heading {
+        color: #761213;
+      }
+
+      .subheading {
+        color: #876d22;
+      }
+
+      .list-group {
+        background-color: #fff;
+      }
+
+      .skill-select {
+        font-size: 1.25rem;
+        background: none;
+        border: none;
+        font-weight: 500;
+      }
+
+
+      .nav-pills {
+        background-color: #761213;
+      }
+
+
+      .nav-pills .nav-item .nav-link {
+        padding: 1rem;
+        color: #ccc;
+        border-radius: 0;
+      }
+
+      .nav-pills .nav-link.active, .show>.nav-pills .nav-link {
+        color: #fff;
+        background-color: #650f10;
+      }
+
       .dice-symbol {
         min-width: 60px;
         min-height: 60px;
@@ -39,15 +85,26 @@
       }
     </style>
   </head>
-  <body style="background-color: #f2f2f2;">
-    <div class="container">
-      <div class="row">
-        <div class="col mt-4">
-          <div class="form-group">
-            <ul class="list-group" style="background-color: #fff;">
+  <body>
+    <div class="d-flex flex-column flex-md-row" style="height: 100%;">
+      <ul class="nav nav-pills flex-row flex-md-column">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#skills" role="tab" aria-controls="skills">Skills</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#manuevers" role="tab" aria-controls="manuevers">Manuevers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#combat" role="tab" aria-controls="combat">Combat</a>
+        </li>
+      </ul>
+      <div>
+        <div class="tab-pane fade show active" id="skills">
+          <div class="p-4">
+            <ul class="list-group">
               <li class="list-group-item text-uppercase">
-                <select class="form-control" ng-model="selectedSkill" ng-options="skill as skill.name for skill in skills track by skill.name" style="color: #761213; font-size: 1.25rem; background: none; border: none; font-weight: 500;"></select>
-                <h6 ng-if="selectedSkill.attribute" class="m-0 pl-2 small" style="color: #761213;">[{{selectedSkill.attribute}}]</h6>
+                <select class="form-control heading skill-select" ng-model="selectedSkill" ng-options="skill as skill.name for skill in skills track by skill.name"></select>
+                <h6 ng-if="selectedSkill.attribute" class="m-0 pl-2 small heading">[{{selectedSkill.attribute}}]</h6>
               </li>
               <li class="list-group-item">
                 {{selectedSkill.description}}
@@ -58,6 +115,10 @@
               </li>
             </ul>
           </div>
+        </div>
+        <div class="tab-pane fade" id="manuevers">
+        </div>
+        <div class="tab-pane fade" id="combat">
         </div>
       </div>
     </div>
