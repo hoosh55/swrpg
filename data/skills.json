@@ -1,0 +1,57 @@
+[
+  {
+    "name":"Astrogation",
+    "attribute":"INT",
+    "results":[
+      {
+        "type":"success",
+        "description":"Additional success beyond those required to calculate a hyperspace jump may be used to better target the location, potentially putting the ship in orbit of the target planet, or used to reduce the time spent calculating when rushed."
+      },
+      {
+        "type":"advantage",
+        "description":"Can be spent to reduce the travel time. On extended journey they might be spent identifying convenient stopover en route or conduct additional business to help defray the overall cost of the trip."
+      },
+      {
+        "type":"triumph",
+        "description":"Can be spent to either complete Astrogation calculations in the minimum amount of time, or greatly reduce the travel time involved. It could also reveal some higly valuable but previously unknown info, such as an alternate travel route."
+      },
+      {
+        "type":"threat",
+        "description":"Can be spent to decrease the accuracy or increase the travel time of a hyperspace jump, or simply cause a character to miss relevant details when analyzing hyperspace routes or galactic maps."
+      },
+      {
+        "type":"despair",
+        "description":"Can be spent in the same way as Threats but to a greater magnitude, or it could trigger something truly awful happening, such as jumping out of hyperspace in the path of an asteroid."
+      }
+    ]
+  },  {
+    "name":"Athletics",
+    "attribute":"BRA",
+    "results":[
+      {
+        "type":"success",
+        "description":"Additional success can reduce the time required to make the check or increase the distance travelled with the check. Athletics or Coordination check to reduce falling damage, each success remove 1 wound and each Advantage 1 strain."
+      },
+      {
+        "type":"advantage",
+        "description":"Can be spent to give the character an additional maneuver during the characters turn to move or perform some other physical activity (still 2 Maneuver limit)."
+      },
+      {
+        "type":"advantage",
+        "description":"Can be spent to give a bonus Boost Dice on other physical checks performed by allies that turn, or on physical checks the character performs later."
+      },
+      {
+        "type":"triumph",
+        "description":"Can be spent to perform the check with truly impressive results."
+      },
+      {
+        "type":"threat",
+        "description":"Small amounts can be spent to simply cause strain, where large amounts may cause a character to fall prone or some other physical mishap that hinders them."
+      },
+      {
+        "type":"despair",
+        "description":"Can be spent as above or even forcing the character to suffer a critical injury."
+      }
+    ]
+  }
+]

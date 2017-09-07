@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="holocron" ng-controller="datapad">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <style>
+      .dice-symbol {
+        min-width: 60px;
+        min-height: 60px;
+      }
+
+      success {
+
+      }
+    </style>
+  </head>
+  <body style="background-color: #f2f2f2;">
+    <div class="container">
+      <div class="row">
+        <div class="col mt-4">
+          <div class="form-group">
+            <ul class="list-group" style="background-color: #fff;">
+              <li class="list-group-item text-uppercase">
+                <select class="form-control" ng-model="selectedSkill" ng-options="skill as skill.name for skill in skills track by skill.name" style="color: #761213; font-size: 1.25rem; background: none; border: none; font-weight: 500;"></select>
+                <h6 ng-if="selectedSkill.attribute" class="m-0 pl-2 small" style="color: #761213;">[{{selectedSkill.attribute}}]</h6>
+              </li>
+              <li class="list-group-item">
+                {{selectedSkill.description}}
+              </li>
+              <li class="list-group-item d-flex justify-content-start align-items-center" ng-repeat="result in selectedSkill.results">
+                <img class="dice-symbol" ng-src="./img/{{result.type}}.svg" alt=""> 
+                <div class="pl-2">{{result.description}}</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/angular.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script>
+      angular.module("holocron", [])
+      .controller("datapad", function($filter, $scope) {
+        $scope.skills = [
+          {
+            "name":"Select a Skill",
+            "description":"The below are general examples of what the results of a roll may determine, these are not the only way to spend the results but merely a quick reference if players or the GM cannot think of a more suitable way to narrate the outcome for the specific situation.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Increase the overall beneficial effect in some way"
+              },
+              {
+                "type":"advantage",
+                "description":"Give an additional unexpected bonus"
+              },
+              {
+                "type":"triumph",
+                "description":"Create an exciting boon to the players for more powerful or long term effects"
+              },
+              {
+                "type":"threat",
+                "description":"Oppose and cancel out Advantages, and can give an unexpected minor setback to an otherwise successful action, or make an unsuccessful action even worse."
+              },
+              {
+                "type":"despair",
+                "description":"Major hindrances that can put characters in greater peril"
+              }
+            ]
+          },{
+            "name":"Astrogation",
+            "attribute":"INT",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success beyond those required to calculate a hyperspace jump may be used to better target the location, potentially putting the ship in orbit of the target planet, or used to reduce the time spent calculating when rushed."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to reduce the travel time. On extended journey they might be spent identifying convenient stopover en route or conduct additional business to help defray the overall cost of the trip."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to either complete Astrogation calculations in the minimum amount of time, or greatly reduce the travel time involved. It could also reveal some higly valuable but previously unknown info, such as an alternate travel route."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to decrease the accuracy or increase the travel time of a hyperspace jump, or simply cause a character to miss relevant details when analyzing hyperspace routes or galactic maps."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent in the same way as Threats but to a greater magnitude, or it could trigger something truly awful happening, such as jumping out of hyperspace in the path of an asteroid."
+              }
+            ]
+          },{
+            "name":"Athletics",
+            "attribute":"BRA",
+            "description":"Athletics serves as a measure of the character’s overall fitness. This skill governs climbing, swimming, jumping, pushing, and pulling for an extended period of time.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success can reduce the time required to make the check or increase the distance travelled with the check. Athletics or Coordination check to reduce falling damage, each success remove 1 wound and each Advantage 1 strain."
+              },
+              {
+                "type":"advantage",
+                "description":"(2) Can be spent to give the character an additional maneuver during the characters turn to move or perform some other physical activity (still 2 Maneuver limit)."
+              },
+              {
+                "type":"advantage",
+                "description":"(2) Can be spent to give a bonus Boost Dice on other physical checks performed by allies that turn, or on physical checks the character performs later."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to perform the check with truly impressive results."
+              },
+              {
+                "type":"threat",
+                "description":"Small amounts can be spent to simply cause strain, where large amounts may cause a character to fall prone or some other physical mishap that hinders them."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent as above or even forcing the character to suffer a critical injury."
+              }
+            ]
+          },{
+            "name":"Charm",
+            "attribute":"PRE",
+            "description":"Charm measures the character’s knack for saying the right thing at the right time, so long as the statement is genuine. This skill is used for persuasion, appeals to a target’s better nature, and sincere seduction attempts.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success can extend the target’s support for additional scenes. Each success spent in this way gains the character an extra scene in which the target is willing to support him."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to affect unexpected subjects beyond the original target. These may be bystanders or others not directly involved in the scene, but who may aid the character in their own way."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to give a bonus Boost Dice on other physical checks performed by allies that turn, or on physical checks the character performs later."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent by the player to choose to have a target NPC become a recurring character who remains predisposed to assist his character. This individual won’t join the group outright, but may offer better prices for fencing goods, or let certain legal charges slide."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to reduce the number of people the character is able to influence or turn those affected negatively against the character."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent by the GM to turn a single NPC against the character and to make them a minor recurring adversary."
+              }
+            ]
+          },{
+            "name":"Coercion",
+            "attribute":"WIL",
+            "description":"When a character attempts to instill obedience in a target through the use of threats or acts of physical intimidation, including interrogation, he utilizes Coercion.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success can be used to inflict strain upon the target (2 successes equate to one Strain)."
+              },
+              {
+                "type":"advantage",
+                "description":"(2) May be spent to affect unexpected subjects beyond the original target. These may be bystanders or others not directly involved in the scene, but who may be cowed by the character as a result of witnessing the Coercion attempt."
+              },
+              {
+                "type":"triumph",
+                "description":"The player may completely break the subject’s willpower. The target’s allegiance shifts to that of a subjugated ally of the acting character rather than the opponent. The newfound follower may be exploited to gain additional information, assets, or even spy within the ranks of a former foe. However, if the betrayel is discovered, this forced loyalty may not be permanent"
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent by the GM to represent a building resentment to the Coercing character. Regardless of the success or failure of a Coercion attempt, the subject may grow to despise the character as a result of being strong-armed."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to represent the character slipping up and revealing something about their goals and motivations to the target. For instance, accidentally slipping up why you want the information or who it is for."
+              }
+            ]
+          },{
+            "name":"Computers",
+            "attribute":"INT",
+            "description":"This skill indicates a character’s understanding of computer hardware and software. Attempts to bypass a building’s security systems, search through encrypted records, alter a droid’s programming, or recover data from a corrupted system are all under the purview of the Computers skill.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success can be spent to reduce the time for the action undertaken, showing familiarity with a system."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to uncover additional information about the system. The character might discover additional assets that could be targeted, the owner’s personal journal entries, or the presence of well concealed defenses. Once the presence of such systems is discovered a character may attempt to gain access to them with further Computer checks."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to add a [Challenge] dice to the check if another slicer should attempt to detect or identify the characters actions with a Computers check."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to represent a character concealing their presence in the system poorly, alerting security systems to their presence, while other slicer attempting to discover them add a [Boost] dice for each Threat generated by the check."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to by the GM to represent leaving behind trace information of their own system in the computer system they were slicing. For each Despair generated the GM may add a [Boost] dice to future Computer checks where an NPC uses the target system to slice the characters own computer system."
+              }
+            ]
+          },{
+            "name":"Cool",
+            "attribute":"PRE",
+            "description":"The ability to stay calm and think as one’s life hangs in the balance is represented by the Cool skill. A player can test Cool to determine Initiative during encounters for which the PC has calmly prepared to take action, such as when setting up an ambush.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Used as an opposed check there are no extra successes. Cool check (and Discipline) can be used in between encounters to remove strain, each success removes one point of strain."
+              },
+              {
+                "type":"advantage",
+                "description":"May be spent to give the character an additional insight into the situation at hand. He may notice an additional complication before it comes into play against him or identify an object that can be directly used against his opponent. Examples could be an escape route if a battle goes sour, a magistrate’s predilection towards a particular style or argument or a guard near a sniper’s target."
+              },
+              {
+                "type":"triumph",
+                "description":"The character has come away from the chaos of the event a better man and may recover 3 strain."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to cause the character to miss vital details or events, such as being so focused on a target that they fail to notice his ally at the sideline drawing their weapon, with enough fails they may succumb to minor shell-shock."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to Stun the character for one round as they are overwhelmed by the chaos."
+              }
+            ]
+          },{
+            "name":"Coordination",
+            "attribute":"AGI",
+            "description":"This skill measures flexibility and sense of balance. To traverse narrow or unstable surfaces, slip free from restraints, or even tumble down from a dangerous height, a character tests Coordination.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success can reduce the time required to make the check or increase the distance traveled with the check. Each success spent in this way can increase the distance moved by 25%, up to a maximum of 4 Succeses (100%). Coordination or Athletics check to reduce falling damage, each success reduces damage by one point."
+              },
+              {
+                "type":"advantage",
+                "description":"(2) Grants the character an additional maneuver during the characters turn to move or perform some other physical activity (still 2 Maneuver limit)."
+              },
+              {
+                "type":"triumph",
+                "description":"???"
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to make the character lose their free maneuver for one round per threat."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to make the character suffer wounds during the check or even lose a vital piece of equipment."
+              }
+            ]
+          },{
+            "name":"Deception",
+            "attribute":"CUN",
+            "description":"Being able to lie believably is represented by the Deception skill. It governs such actions as misrepresenting an object’s value, cheating during gambling, distracting an opponent through guile, feigning romantic interest, and leaving a false trail for pursuers.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success can be spent to extend the lies duration eg. giving the acting character time to get out of the area before the lie is noticed, leave the target less likely to notice the fraud and more susceptible to further deceptions."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to increase the value of any goods or services gained through the action. The subject might simply believe that he is agreeing to fair terms with the liar"
+              },
+              {
+                "type":"triumph",
+                "description":"Can fool the target into believing that the character is a trustworthy sort. Future Deception checks against the target do not require an opposed check, they are simply made at a baseline difficulty depending on the nature of the lie."
+              },
+              {
+                "type":"threat",
+                "description":"During deception checks threats give away a portion of the lie, perhaps the target realizes that it has been lied to, but is unable to identify how much of the interaction is false, thereby becoming more suspicious of the character."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to represent a more extreme example of the above; the character not only distrusts the character, but spreads the word of his deceit and harms his reputation amongst a small group of people as well as realizing they are being lied to and use the situation to their advantage, maybe inserting their own falsehoods into the exchange."
+              }
+            ]
+          },{
+            "name":"Discipline",
+            "attribute":"WIL",
+            "description":"The ability to maintain one’s composure and react in an effective manner is governed by this skill. Discipline allows a character to sense another’s motive, act normally under duress, ignore fear effects, and resist temptations.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Though not always possible, when any extra successes are earned one may be spent to downgrade a Challenge Dice (red) to a Difficulty Dice (Purple) on the character’s next action."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to give the character an additional insight into the situation at hand. He might notice something particularly vulnerable on a seemingly indomitable foe or an unusual pattern to the suppressing fire that give the character a moment to leap from cover to cover."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to allow the character to add a Boost Dice to any Discipline checks made by the character’s allies during the following round, the sight of their ally not blinking in the face of danger enough to bolster their resolve."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent by the GM to undermine the character’s resolve, perhaps inflicting a penalty on further action in the fact of distressing circumstances."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to overwhelm the character entirely. In this case, the character is unable to perform more than a single maneuver during the following round of combat."
+              }
+            ]
+          },{
+            "name":"Knowledge",
+            "attribute":"INT",
+            "description":"???",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success represent a character recalling information in detail or completing research with remarkable haste as well."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to learn extra trivial information about the subject or have the player add in their own ideas with collaborative world building (GM Discretion)."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to learn relevant, beneficial information concerning the subject, perhaps and understanding of a beast’s particular weakness in the case of Knowledge (Zoology), or information concerning the familial strife between two noble houses for Knowledge (Homeland)."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent by the GM to omit vital details about the subject at hand that may have been useful"
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to seed the character with misinformation and outright falsehoods about the subject"
+              }
+            ]
+          },{
+            "name":"Leadership",
+            "attribute":"PRE",
+            "description":"Leadership means being able to make smart decisions, to remain firm and decisive when doing so, and to instill loyalty and respect. The skill can also be used to sway a crowd to take action, rally allies against insurmountable odds, and reassert authority over a wayward underling.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success can be spent to extend the target’s support for additional scenes or may increase the efficiency or effectiveness of the target during the ordered actions."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to affect bystanders in addition to the target."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to allow the character to choose to have the target NPC become a recurring character who decides to faithfully follow the acting character. This individual may decide to join the groups character’s group/organization, offering their services as a permanent aide de camp."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to decrease the efficiency of the ordered actions, causing them to take longer or be done poorly"
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to undermine the character’s authority, damaging the character’s ability to command the target or those who witnessed the attempt. Shouls a character accrue multiple Despair on a single leadership check, the target may become a recurring thorn in the character’s side, either by refusing future orders our turning others agains the player."
+              }
+            ]
+          }
+        ]
+
+        $scope.selectedSkill = $scope.skills[0]
+      });
+    </script>
+  </body>
+</html>
