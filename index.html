@@ -12,11 +12,40 @@
       body {
         position: absolute;
         top: 0; bottom: 0; left: 0; right: 0;
-        background-color: #f2f2f2;
+        background-color: #FAFAFA;
       }
 
-      .title {
+      #nav {
+        position: absolute; 
+        top: 0; 
+        bottom: 0;
+        left: 0;
+        width: 200px;
+      }
+
+      #content {
+        position: absolute; 
+        top: 0; 
+        bottom: 0;
+        left: 200px;
+        right: 0;
+        overflow-y: scroll;
+      }
+
+      .title{
         color: #52644a;
+      }
+
+      .thead-inverse th {
+        background-color: #52644a;
+      }
+
+      .table-heading {
+        margin: 0px;
+        padding: 1rem;
+        background-color: #52644a;
+        color: #fff;
+        text-align: center;
       }
 
       .heading {
@@ -27,8 +56,51 @@
         color: #876d22;
       }
 
-      .list-group {
+      .content-item-list-group {
         background-color: #fff;
+        margin: 1.5rem!important;
+      }
+
+      .content-item-table {
+        background-color: #fff;
+        margin: 1.5rem!important;
+        border: 1px solid rgba(0,0,0,.125)
+      }
+
+      table {
+        margin:0px !important;
+      }
+
+      .table-striped td, .table-striped th {
+        border: none;
+      }
+
+      .table-striped tbody tr:nth-of-type(even) {
+        background-color: #fff
+      }
+
+      .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #F5F5F5;
+      }
+
+      .table-inner {
+        padding: 0px !important;
+      }
+
+      .table-inner table {
+        margin-bottom: 0px;
+      }
+
+      .table-inner table td {
+        border: none;
+      }
+
+      .table-inner tbody tr:nth-of-type(odd) {
+          background-color: #F5F5F5;;
+      }
+
+      .table-inner tbody tr:nth-of-type(even) {
+          background-color: #fff;
       }
 
       .skill-select {
@@ -38,26 +110,62 @@
         font-weight: 500;
       }
 
-
       .nav-pills {
-        background-color: #761213;
+        background-color: #f5f5f5;
+        min-width: 200px;
+        border-right: 1px solid #ebebeb;
       }
-
 
       .nav-pills .nav-item .nav-link {
         padding: 1rem;
-        color: #ccc;
+        color: #888888;
         border-radius: 0;
       }
 
+      .nav-pills .nav-item .nav-link img {
+        max-width: 15px;
+        height: auto;
+        margin-right: .5rem;
+      }
+
+      .nav-pills .nav-item .nav-link svg {
+        fill: #888888;
+      }
+
+      .nav-pills .nav-item .nav-link:hover {
+        background-color: #ebebeb;
+        color: #000;
+      }
+
+      .nav-pills .nav-item .nav-link:hover svg {
+        fill: #000;
+      }
+
       .nav-pills .nav-link.active, .show>.nav-pills .nav-link {
-        color: #fff;
-        background-color: #650f10;
+        color: #000;
+        font-weight: 500;
+        background-color: #ebebeb;
+      }
+
+      .nav-pills .nav-link.active svg, .show>.nav-pills .nav-link svg {
+        fill: #761213 !important;
+      }
+
+      .table td, .table th {
+        vertical-align: middle;
+      }
+
+      .tab-pane {
+        display: none;
+      }
+
+      .tab-pane.active {
+        display: block;
       }
 
       .dice-symbol {
-        min-width: 60px;
-        min-height: 60px;
+        flex-grow: 0;
+        flex-shrink: 0;
       }
 
       .ability {
@@ -86,21 +194,30 @@
     </style>
   </head>
   <body>
-    <div class="d-flex flex-column flex-md-row" style="height: 100%;">
-      <ul class="nav nav-pills flex-row flex-md-column">
+    <div style="height: 100%;">
+      <ul id="nav" class="nav nav-pills flex-row flex-md-column">
         <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#skills" role="tab" aria-controls="skills">Skills</a>
+          <a class="nav-link d-flex justify-content-start align-items-center active" data-toggle="tab" href="#skills" role="tab" aria-controls="skills">
+            <img class="" src="./img/skills.svg">
+            Skills
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#manuevers" role="tab" aria-controls="manuevers">Manuevers</a>
+          <a class="nav-link d-flex justify-content-start align-items-center" data-toggle="tab" href="#manuevers" role="tab" aria-controls="manuevers">
+            <img class="" src="./img/manuever.svg">
+            Manuevers
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#combat" role="tab" aria-controls="combat">Combat</a>
+          <a class="nav-link d-flex justify-content-start align-items-center" data-toggle="tab" href="#combat" role="tab" aria-controls="combat">
+            <img class="" src="./img/weapons.svg">
+            Combat
+          </a>
         </li>
       </ul>
-      <div>
-        <div class="tab-pane fade show active" id="skills">
-          <div class="p-4">
+      <div id="content">
+        <div class="tab-pane active" id="skills">
+          <div class="content-item-list-group">
             <ul class="list-group">
               <li class="list-group-item text-uppercase">
                 <select class="form-control heading skill-select" ng-model="selectedSkill" ng-options="skill as skill.name for skill in skills track by skill.name"></select>
@@ -110,15 +227,296 @@
                 {{selectedSkill.description}}
               </li>
               <li class="list-group-item d-flex justify-content-start align-items-center" ng-repeat="result in selectedSkill.results">
-                <img class="dice-symbol" ng-src="./img/{{result.type}}.svg" alt=""> 
+                <svg class="dice-symbol" width="60" height="60">
+                  <use ng-href="#{{result.type}}" xlink:href="" />
+                </svg>
                 <div class="pl-2">{{result.description}}</div>
               </li>
             </ul>
           </div>
         </div>
-        <div class="tab-pane fade" id="manuevers">
+        <div class="tab-pane" id="manuevers">
+          <div class="content-item-list-group">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <select ng-model="theater" ng-init="theater = 'ground'" class="form-control heading skill-select">
+                  <option value="ground">Ground Combat</option>
+                  <option value="vehicle">Vehicle Combat</option>
+                </select>
+              </li>
+              <li class="list-group-item" ng-if="theater === 'ground'">
+                <h5 class="mt-1 subheading">Aim</h5>
+                <p>During combat, a character can use the Aim maneuver to steady a weapon or line up a hit before attacking, granting a bonus to his next combat check. A character only gains the benefit of aiming if he remains in his current position and does not perform any additional maneuvers or actions before his next combat check. Any damage that exceeds the character's soak also negates the benefit of aiming.</p>
+                <p>Aiming provides the character with one of the two following bonuses:</p>
+                <ul>
+                  <li>Gain Boost on the next combat check. If the character spends two consecutive maneuvers aiming, he gains Boost Boost on the next combat check.</li>
+                  <li>Target a specific item carried by the target, or a specific part of the target This could allow the character to attempt to strike or shoot a weapon from his opponent's hand, for example, or target an opponent's limb to cripple him. If the character spends one maneuver aiming to do this, his next combat check suffers Setback Setback If he spends two consecutive maneuvers aiming, the combat check suffers Setback instead</li>
+                </ul>
+              </li>
+              <li class="list-group-item" ng-if="theater === 'ground'">
+                <h5 class="mt-1 subheading">Assist</h5>
+                <p>Performing the assist maneuver allows an engaged ally to add Boost to his next check. Several characters can use the assist maneuver to add more bonus Boost to the engaged ally's next check. All awarded bonus dice must be used on the assisted character's next turn, otherwise they are discarded. The Game Master should use his own discretion when allowing Players to assist one another. Some actions simply do not benefit from assistance.</p>
+              </li>
+              <li class="list-group-item" ng-if="theater === 'ground'">
+                <h5 class="mt-1 subheading">Guarded Stance</h5>
+                <p>A character can take a maneuver to assume a guarded stance, helping him defend against melee attacks. A character who performs this maneuver adds Setback to any combat checks he makes until the end of his next turn. However, he also gains melee defense 1 until the end of his next turn.</p>
+              </li>
+              <li class="list-group-item" ng-if="theater === 'ground'">
+                <h5 class="mt-1 subheading">Interact with the Enviroment</h5>
+                <p>Often a single maneuver is enough to interact with the environment around a character. This is a broad category of possible interactions, such as opening a blast door, ducking behind a wall, pressing a specific button on a control panel, or grabbing a blaster off of the ground. The following are some more specifically designed examples of interacting with the environment:</p>
+                <ul>
+                  <li><strong>Moving a large item.</strong> Flipping over a table, shoving a barrel into a pursuer's path, hefting a crate; all of these would take a maneuver to perform</li>
+                  <li><strong>Opening or closing a door.</strong> Whether an electronic blast door or a primitive door with latches and hinges, opening or closing it takes a maneuver.</li>
+                  <li><strong>Taking cover.</strong> Ducking behind a door jam, crouching behind a crate, or peeking around a tree trunk; all of these allow the character to gain ranged defense 1 (and some cover can grant a ranged defense higher than 1 if particularly sturdy). It takes a maneuver to take cover, but once in cover, the character keeps the bonus unless the circumstances around him change so that he would no longer benefit from cover, or he moves out of cover.</li>
+                </ul>
+              </li>
+              <li class="list-group-item" ng-if="theater === 'ground'">
+                <h5 class="mt-1 subheading">Manage Gear</h5>
+                <p>Managing items and equipment is accomplished by this maneuver, which can cover the following options</p>
+                <ul>
+                  <li><strong>Draw, holster, ready, or load a weapon.</strong> This maneuver covers the basic manipulations of most weapons, such as drawing a vibroknife from its sheath, recharging a blaster rifle's energy cells (provided the character has additional ammo at hand), or drawing and prepping a thermal detonator for use.</li>
+                  <li><strong>Draw something from storage, or put it away.</strong> A character can perform a maneuver to retrieve an item from a pouch, backpack, satchel, bandolier, or some other accessible container. This can also be used to stow items in a similar fashion.</li>
+                </ul>
+              </li>
+              <li class="list-group-item" ng-if="theater === 'ground'">
+                <h5 class="mt-1 subheading">Mount or Dismount</h5>
+                <p>Mounting and dismounting a domesticated animal such as a trained dewback or a tauntaun requires a maneuver. (Successfully mounting an untrained animal, however, requires a Medium (Difficulty Difficulty) Survival check, which may be harder depending on how ornery the GM feels the animal is ) Similarly, mounting a vehicle, sliding into a cockpit, or otherwise engaging a vehicle for piloting or a gunnery station for use requires a maneuver as well.</p>
+              </li>
+              <li class="list-group-item" ng-if="theater === 'ground'">
+                <h5 class="mt-1 subheading">Move</h5>
+                <p>This maneuver allows the character to move within his environment. The game defines several different broad types of movement. When characters move, they do one of the following:</p>
+                <ul>
+                  <li><strong>Change range increment.</strong> Performing this maneuver allows a character to move between short and medium range relative to another person or object This also allows characters to move between medium and long range by performing two maneuvers, or between tong and extreme range by performing two maneuvers. When covering long distances, multiple maneuvers do not have to be performed on the same turn, but the character is not considered to be in the new range increment until all required maneuvers have been performed.</li>
+                  <li><strong>Engage or Disengage from an opponent.</strong> If a target is already within short range of a character, the character can perform a maneuver to engage that target. If the character is engaged with an opponent or adversary, he must perform a maneuver to disengage with that opponent before moving to any other location. This only changes his range relative to his opponent from "engaged" to "short" and represents the effort of backing away and avoiding his opponent's attacks. Characters do not need to perform this maneuver to leave an engagement consisting only of friendly characters or allies.</li>
+                  <li><strong>Moving within short range.</strong> Performing this maneuver allows an unengaged character to move to another position that is currently within short range of him.</li>
+                </ul>
+              </li>
+              <li class="list-group-item" ng-if="theater === 'ground'">
+                <h5 class="mt-1 subheading">Drop Prone or Stand from Prone</h5>
+                <p>Dropping prone and standing from a prone position each require a maneuver. Dropping prone allows the character to add Setback to all ranged attacks made against him, although he also must add Boost to all melee attacks made against him.</p>
+              </li>
+              <li class="list-group-item" ng-if="theater === 'ground'">
+                <h5 class="mt-1 subheading">Preparation</h5>
+                <p>Some actions require additional preparation to perform safely. The preparation maneuver is generally performed in conjunction with another ability to confer a bonus, offset a penalty, or fulfill a requirement. The individual talents or abilities that utilize the preparation maneuver define its specific effect. It is sometimes abbreviated under the requirements as "prepare."</p>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="tab-pane fade" id="combat">
+        <div class="tab-pane" id="combat">
+          <div class="content-item-list-group">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <h5 class="mt-2 heading">Spending Dice in Combat</h5>
+              </li>
+              <li class="list-group-item d-flex justify-content-start align-items-center">
+                <svg class="dice-symbol" width="30" height="30">
+                  <use ng-href="#advantage" xlink:href="" />
+                </svg>
+                <div class="pl-2">
+                  <ul>
+                    <li>Recover 1 Strain (this option may be selected more than once)</li>
+                    <li>Add Boost to the next allied active character's check</li>
+                    <li>Notice a single important point in teh ongoing conflict, such as the location of a blast door's control panel or a weak poit on an attack speeder</li>
+                    <li>Inflict a Critical injury with a successful attack that deals damage past soak (Advantage cost may vary)</li>
+                    <li>Activate a weapon quality (Advantage cost may vary)</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-start align-items-center">
+                <svg class="dice-symbol" width="30" height="30">
+                  <use ng-href="#advantage" xlink:href="" />
+                </svg>
+                <svg class="dice-symbol" style="margin-left: -10px;" width="30" height="30">
+                  <use ng-href="#advantage" xlink:href="" />
+                </svg>
+                <div class="pl-2">
+                  <ul>
+                    <li>Perform an immediate free manuever that does not exceed the two manuever per turn limit</li>
+                    <li>Add Setback to the targeted character's next check</li>
+                    <li>Add Boost to any allied character's next check, including the active character</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-start align-items-center">
+                <svg class="dice-symbol" width="30" height="30">
+                  <use ng-href="#advantage" xlink:href="" />
+                </svg>
+                <svg class="dice-symbol" style="margin-left: -10px;" width="30" height="30">
+                  <use ng-href="#advantage" xlink:href="" />
+                </svg>
+                <svg class="dice-symbol" style="margin-left: -10px;" width="30" height="30">
+                  <use ng-href="#advantage" xlink:href="" />
+                </svg>
+                <div class="pl-2">
+                  <ul>
+                    <li>Negate the targeted enemy’s defensive bonuses (such as the defense gained from cover, equipment, or performing the Guarded Stance maneuver) until the end of the current round.</li>
+                    <li>Ignore penalizing environmental effects until the end of the active character’s next turn.</li>
+                    <li>When dealing damage to a target, have the attack disable the opponent or one piece of gear rather than dealing wounds or strain. This could include hobbling him temporarily with a shot to the leg, or disabling his climbing gear. The effects can be similar to a Critical Wound but are only temporary, not too excessive and agreed upon by the GM.</li>
+                    <li>Gain +1 Melee or Ranged Defense until the end of the character’s next turn.</li>
+                    <li>Force the target to drop a melee or ranged weapon it is wielding.</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-start align-items-center">
+                <svg class="dice-symbol" width="30" height="30">
+                  <use ng-href="#triumph" xlink:href="" />
+                </svg>
+                <div class="pl-2">
+                  <ul>
+                    <li>Upgrade the difficulty of the targeted character's next check.</li>
+                    <li>Upgrade any allied character's next check, including the current active character.</li>
+                    <li>Do something vital, such as shooting the controls to the nearby blast doors to seal them shut.</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-start align-items-center">
+                <svg class="dice-symbol" width="30" height="30">
+                  <use ng-href="#triumph" xlink:href="" />
+                </svg>
+                <svg class="dice-symbol" style="margin-left: -10px;" width="30" height="30">
+                  <use ng-href="#triumph" xlink:href="" />
+                </svg>
+                <div class="pl-2">
+                  <ul>
+                    <li>When dealing damage to a target, have the attack destroy a piece of equipment the target is using, such 1 as blowing up his blaster or destroying a personal shield generator .</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-start align-items-center">
+                <svg class="dice-symbol" width="30" height="30">
+                  <use ng-href="#threat" xlink:href="" />
+                </svg>
+                <div class="pl-2">
+                  <ul>
+                    <li>The active character suffers 1 strain (this option may be selected more than once)</li>
+                    <li>The active character loses the benefits of a prior maneuver (such as from taking cover or assuming a Guarded Stance) until he performs the maneuver again</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-start align-items-center">
+                <svg class="dice-symbol" width="30" height="30">
+                  <use ng-href="#threat" xlink:href="" />
+                </svg>
+                <svg style="margin-left: -10px" class="dice-symbol" width="30" height="30">
+                  <use ng-href="#threat" xlink:href="" />
+                </svg>
+                <div class="pl-2">
+                  <ul>
+                    <li>An opponent may immediately perform one free maneuver in response to the active character's check.</li>
+                    <li>Add Boost to the targeted character's next check.</li>
+                    <li>The active character or an allied character suffers Setback on his next action.</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-start align-items-center">
+                <svg class="dice-symbol" width="30" height="30">
+                  <use ng-href="#threat" xlink:href="" />
+                </svg>
+                <svg style="margin-left: -10px" class="dice-symbol" width="30" height="30">
+                  <use ng-href="#threat" xlink:href="" />
+                </svg>
+                <svg style="margin-left: -10px" class="dice-symbol" width="30" height="30">
+                  <use ng-href="#threat" xlink:href="" />
+                </svg>
+                <div class="pl-2">
+                  <ul>
+                    <li>The active character falls prone</li>
+                    <li>The active character grants the enemy a significant advantage in the ongoing encounter, such as accidentally blasting the controls to a bridge he was planning to use for his escape.</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-start align-items-center">
+                <svg class="dice-symbol" width="30" height="30">
+                  <use ng-href="#despair" xlink:href="" />
+                </svg>
+                <div class="pl-2">
+                  <ul>
+                    <li>The character's ranged weapon immediately runs out of ammunition and may not be used for the remainder of the encounter.</li>
+                    <li>Upgrade the difficulty of an allied character's next check, including the current active character.</li>
+                    <li>The tool or melee weapon the character is using becomes damaged</li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="content-item-table">
+            <h5 class="table-heading">Range Bands</h5>
+            <table class="table table-striped">
+              <thead class="thead-inverse">
+                <tr>
+                  <th>Range Band</th>
+                  <th>Difficulty</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Engaged</td>
+                  <td class="table-inner">
+                    <table class="table table-striped">
+                      <tbody>
+                        <tr>
+                          <td class="d-flex align-items-center">
+                            Melee or Brawl:<svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="d-flex align-items-center">
+                            Ranged (Light):<svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="d-flex align-items-center">
+                            Ranged (Heavy):<svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Short</td>
+                  <td class="d-flex align-items-center"><svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg></td>
+                </tr>
+                <tr>
+                  <td>Medium</td>
+                  <td class="d-flex align-items-center"><svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg></td>
+                </tr>
+                <tr>
+                  <td>Long</td>
+                  <td class="d-flex align-items-center"><svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg></td>
+                </tr>
+                <tr>
+                  <td>Extreme</td>
+                  <td class="d-flex align-items-center"><svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="content-item-table">
+            <h5 class="table-heading">Critical Hits</h5>
+            <table class="table table-striped">
+              <thead class="thead-inverse">
+                <tr>
+                  <th>d100</th>
+                  <th>Severity</th>
+                  <th>Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="crit in critcalInjury">
+                  <td>{{($index * 5) + 1}} - {{($index * 5) + 5}}</td>
+                  <td class="d-flex align-items-center">
+                    <svg ng-if="crit.severity > 0" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg>
+                    <svg ng-if="crit.severity > 1" style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg>
+                    <svg ng-if="crit.severity > 2" style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg>
+                    <svg ng-if="crit.severity > 3" style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg>
+                    <svg ng-if="crit.severity > 4" style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty" xlink:href="" /></svg>
+                  </td>
+                  <td><strong>{{crit.name}}:</strong> {{crit.description}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -161,6 +559,7 @@
           },{
             "name":"Astrogation",
             "attribute":"INT",
+            "description":"Represents a character's ability to use his knowledge of the galaxy to most effectively program the hyperspace coordinates for any jump.",
             "results":[
               {
                 "type":"success",
@@ -216,7 +615,7 @@
           },{
             "name":"Charm",
             "attribute":"PRE",
-            "description":"Charm measures the character’s knack for saying the right thing at the right time, so long as the statement is genuine. This skill is used for persuasion, appeals to a target’s better nature, and sincere seduction attempts.",
+            "description":"Charm measures the character’s knack for saying the right thing at the right time, so long as the statement is genuine. This skill is used for persuasion, appeals to a target’s better nature, and sincere seduction attempts. Opposed with Cool",
             "results":[
               {
                 "type":"success",
@@ -246,7 +645,7 @@
           },{
             "name":"Coercion",
             "attribute":"WIL",
-            "description":"When a character attempts to instill obedience in a target through the use of threats or acts of physical intimidation, including interrogation, he utilizes Coercion.",
+            "description":"When a character attempts to instill obedience in a target through the use of threats or acts of physical intimidation, including interrogation, he utilizes Coercion. Opposed with Discipline.",
             "results":[
               {
                 "type":"success",
@@ -298,7 +697,7 @@
           },{
             "name":"Cool",
             "attribute":"PRE",
-            "description":"The ability to stay calm and think as one’s life hangs in the balance is represented by the Cool skill. A player can test Cool to determine Initiative during encounters for which the PC has calmly prepared to take action, such as when setting up an ambush.",
+            "description":"The ability to stay calm and think as one’s life hangs in the balance is represented by the Cool skill. A player can test Cool to determine Initiative during encounters for which the PC has calmly prepared to take action, such as when setting up an ambush. Also used for Gambling along with Discipline.",
             "results":[
               {
                 "type":"success",
@@ -328,7 +727,7 @@
             "results":[
               {
                 "type":"success",
-                "description":"Additional success can reduce the time required to make the check or increase the distance traveled with the check. Each success spent in this way can increase the distance moved by 25%, up to a maximum of 4 Succeses (100%). Coordination or Athletics check to reduce falling damage, each success reduces damage by one point."
+                "description":"Additional success can reduce the time required to make the check or increase the distance traveled with the check. Each success spent in this way can increase the distance moved by 25%, up to a maximum of 4 Successes (100%). Coordination or Athletics check to reduce falling damage, each success reduces damage by one point."
               },
               {
                 "type":"advantage",
@@ -336,7 +735,7 @@
               },
               {
                 "type":"triumph",
-                "description":"???"
+                "description":"Accomplish the task with truly impressive results, granting additional benefits in the course of completing it."
               },
               {
                 "type":"threat",
@@ -350,7 +749,7 @@
           },{
             "name":"Deception",
             "attribute":"CUN",
-            "description":"Being able to lie believably is represented by the Deception skill. It governs such actions as misrepresenting an object’s value, cheating during gambling, distracting an opponent through guile, feigning romantic interest, and leaving a false trail for pursuers.",
+            "description":"Being able to lie believably is represented by the Deception skill. It governs such actions as misrepresenting an object’s value, cheating during gambling, distracting an opponent through guile, feigning romantic interest, and leaving a false trail for pursuers. Opposed with Discipline.",
             "results":[
               {
                 "type":"success",
@@ -376,7 +775,7 @@
           },{
             "name":"Discipline",
             "attribute":"WIL",
-            "description":"The ability to maintain one’s composure and react in an effective manner is governed by this skill. Discipline allows a character to sense another’s motive, act normally under duress, ignore fear effects, and resist temptations.",
+            "description":"The ability to maintain one’s composure and react in an effective manner is governed by this skill. Discipline allows a character to sense another’s motive, act normally under duress, ignore fear effects, and resist temptations. Also used for Gambling along with Discipline.",
             "results":[
               {
                 "type":"success",
@@ -402,7 +801,7 @@
           },{
             "name":"Knowledge",
             "attribute":"INT",
-            "description":"???",
+            "description":"Knowledge skills enable a player to make decisions about his character's actions that are informed by what his character might know. Can also be used to appraise items.",
             "results":[
               {
                 "type":"success",
@@ -428,7 +827,7 @@
           },{
             "name":"Leadership",
             "attribute":"PRE",
-            "description":"Leadership means being able to make smart decisions, to remain firm and decisive when doing so, and to instill loyalty and respect. The skill can also be used to sway a crowd to take action, rally allies against insurmountable odds, and reassert authority over a wayward underling.",
+            "description":"Leadership means being able to make smart decisions, to remain firm and decisive when doing so, and to instill loyalty and respect. The skill can also be used to sway a crowd to take action, rally allies against insurmountable odds, and reassert authority over a wayward underling. Opposed with Discipline.",
             "results":[
               {
                 "type":"success",
@@ -448,14 +847,518 @@
               },
               {
                 "type":"despair",
-                "description":"Can be spent to undermine the character’s authority, damaging the character’s ability to command the target or those who witnessed the attempt. Shouls a character accrue multiple Despair on a single leadership check, the target may become a recurring thorn in the character’s side, either by refusing future orders our turning others agains the player."
+                "description":"Can be spent to undermine the character’s authority, damaging the character’s ability to command the target or those who witnessed the attempt. Should a character accrue multiple Despair on a single leadership check, the target may become a recurring thorn in the character’s side, either by refusing future orders our turning others against the player."
               }
             ]
+          },{
+            "name":"Mechanics",
+            "attribute":"INT",
+            "description":"This skill indicates a character’s familiarity with the inner workings of planetary and atmospheric craft, droids, weapons, and gadgets. Attempting repairs, modifications, and even new construction all fall under Mechanics.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success may be used to increase the efficiency of the action. Each additional Success may be used to reduce the time required to make an item or repairs by 10-20%"
+              },
+              {
+                "type":"advantage",
+                "description":"Advantage generated during a Mechanics check can mean especially high-quality repairs, possibly even making the item even higher quality than it originally was. This may grant a Boost Dice when using the item, or even make it count as having the Superior quality for a session."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to give an item an additional function, which is only good for a single use e.g. a temporary engine speed boost or a more powerful blaster shot. The nature and precise details of this temporary function are GM discretion"
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to make the target of the mechanics check to fail and no longer work after a certain number of uses or a certain amount of time representing particularly shoddy repairs or temporary measures."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to cause further harm to the object or cause other components of the object to begin malfunctioning."
+              }
+            ]
+          },{
+            "name":"Medicine",
+            "attribute":"INT",
+            "description":"The Medicine skill encompasses the ability to recall anatomical and pathological knowledge, perform routine first aid or triage, treat poison, and conduct surgery.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success normally heals a single wound, up to a maximum number of wounds the target is currently suffering. Beyond that additional Successes have no mechanical effect but may represent particularly competent medical aid."
+              },
+              {
+                "type":"advantage",
+                "description":"(1+) Advantages generated may be spent to eliminate one strain from the target."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to heal a Critical Injury or heal additional wounds."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent by the GM to inflict strain on the target to represent the shock of the procedure or to increase the amount of time the procedure takes."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to represent a truly terrible accident, perhaps the character unintentionally influencing further wounds on the target who they were healing or an additional Critical Wound."
+              }
+            ]
+          },{
+            "name":"Negotiation",
+            "attribute":"PRE",
+            "description":"The skill of Negotiation deals with bartering, selling, and trading for goods and services, with the goal of receiving the best possible price. Opposed with Negotiation or Cool",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success may be used to increase the acting character’s profit by 5% per Success. They may alternatively be used to modify the scope of the agreement, so that the contract can extend for a longer period of time or more goods may be obtained for a given price."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to earn unrelated boons from the target, either concessions if the check is failed, or extra perks if it is passed."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to have the target NPC become a regular client or specialist vendor. The NPC might thereafter keep an eye out for specific goods the PC may be interested in, or offer referrals to other clients regarding the quality of his service."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to increase the cost of goods the character is attempting to purchase, decrease the value of those they are attempting to sell, or shorten contract they are trying to negotiate."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to seriously sabotage the character’s goals during the interaction, perhaps the character receives counterfeit goods or payment, or agrees to terms that are entirely beyond the scope of the negotiation."
+              }
+            ]
+          },{
+            "name":"Perception",
+            "attribute":"CUN",
+            "description":"Perception encompasses all of a character’s natural senses, which usually number five in Humans, but may comprise more in some cybernetically enhanced beings and alien species. This skill governs the ability to notice traps or ambushes, pickpockets or sneaks, and subtle clues or faraway objects.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success may be used to reveal additional details. Perhaps the character recognizes the speakers accent, the stuttered script of a forged signature, or the number of attackers lying in ambush."
+              },
+              {
+                "type":"advantage",
+                "description":"May be used to recall additional information associated with the object noticed. Perhaps a passing familiarity with a field of study represents the reason why the character initially realized that something was out of place."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to notice details that can be useful later, so characters can gain a Boost Dice on future interactions with the noticed element."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent by the GM to conceal a vital detail about the situation or environment from the character."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to cause the character to obtain false information about their surroundings or the target in question."
+              }
+            ]
+          },{
+            "name":"Piloting (Planetary)",
+            "attribute":"AGI",
+            "description":"This skill allows one to use repulsorlift vehicles, watercraft, and aircraft under adverse conditions, or to outrun an opponent during a race or chase.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success may be used to gain insights into the current situation that may help them out. Alternatively they might deduce a way that their vehicle could be modified so that it could be more effective in the future."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to reveal a vulnerability in an opponents piloting style or vehicle, giving the character a benefit in later rounds of combat."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to let the character take an additional maneuver action while continuing to pilot the vehicle."
+              },
+              {
+                "type":"threat",
+                "description":"A GM may spend 2 Threat during a check to give opponents a [Boost] dice on checks against the character and his vehicle to represent a momentary malfunction in one of the vehicle’s systems."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to deal actual damage to the vehicle, as the character strains systems throughout the vehicle during their check."
+              }
+            ]
+          },{
+            "name":"Piloting (Space)",
+            "attribute":"CUN",
+            "description":"This skill allows one to use spacecraft under adverse conditions, or to outrun an opponent during a race or chase.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success may be used to gain insights into the current situation that may help them out. Alternatively they might deduce a way that their vehicle could be modified so that it could be more effective in the future."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to reveal a vulnerability in an opponents piloting style or vehicle, giving the character a benefit in later rounds of combat."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to let the character take an additional maneuver action while continuing to pilot the vehicle."
+              },
+              {
+                "type":"threat",
+                "description":"A GM may spend 2 Threat during a check to give opponents a [Boost] dice on checks against the character and his vehicle to represent a momentary malfunction in one of the vehicle’s systems."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to deal actual damage to the vehicle, as the character strains systems throughout the vehicle during their check."
+              }
+            ]
+          },{
+            "name":"Resilience",
+            "attribute":"BRA",
+            "description":"Resilience represents a character's physical fortitude against sleep deprivation, hideous climates, malnutrition or toxins, or their ability to be pushed beyond reasonable limits.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success may be used to extend the effects of the success, so that the character may for a longer period of time prior to making an additional check."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to identify a way for the character and his allies to reduce the difficulty of future checks against the same threat."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to recover three strain as the character resolves to work through the adversity."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to overburden the character, inflicting penalties on the subsequent checks."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to inflict a wound or minor critical injury on the character as they succumb to the harsh conditions."
+              }
+            ]
+          },{
+            "name":"Skullduggery",
+            "attribute":"CUN",
+            "description":"Skulduggery encompasses a range of skills that are crucial to performing criminal actions. These include picking pockets and locks, breaking into and out of secure facilities, sleight of hand, disguise, setting traps, and other mischief.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success should indicate extra insights that the acting character gained about the nature of his opposition. This might suggest that the thief could better plan his strategy against the current foe to avoid future complications."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to identify an additional potential target, or gain additional items. Perhaps as the characters make good their escape, they discover their opponent’s chest of treasure."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to earn the character a boon he had not expected. In such cases, the value of the item stolen might exceed his expectations, and might also provide vital information. When using Skulduggery to pick a lock, the character might devise a near permanent means of overcoming the lock, perhaps by crafting a makeshift key or by getting access to the actual key itself."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent on catching the character in the act, the number of threat spent by the GM the more immediate the discovery and ensuing danger."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to cause the character to leave behind some evidence of their larceny such as a recognizable piece of adornment, such as an heirloom ring, that slips off into a target’s pocket as the character attempts to pick it."
+              }
+            ]
+          },{
+            "name":"Stealth",
+            "attribute":"AGI",
+            "description":"This skill reflects the ability to avoid notice by an opponent, eluding any or all of its senses. Stealth allows a character to follow targets without being detected, use camouflage, and conceal other people and objects.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success may be used to aid any allied characters that are infiltrating at the same time. Effectively, the successful character points out a factor that might have caused the ally to fail."
+              },
+              {
+                "type":"advantage",
+                "description":"May be used to recall additional information associated with the object noticed. Perhaps a passing familiarity with a field of study represents the reason why the character initially realized that something was out of place."
+              },
+              {
+                "type":"triumph",
+                "description":"Under the right circumstances a Triumph can be spent to identify a way to distract an opponent for the duration of the scene. This could allow the character to drop all pretense of Stealth in favor of completing a task far more swiftly."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to hinder the character as they attempt to remain hidden. The character may need to overcome a particularly unpleasant obstacle or take extra time to remain out of sight. The GM may increase the time it take for the character to perform their desired action while hidden by 25% per Threat spent in this way."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to cause the character to leave behind some evidence of their passing and though having no bearing on the success or failure of the Stealth check, some object, clue or information is left behind concerning the character’s identity and possibly their motive."
+              }
+            ]
+          },{
+            "name":"Streetwise",
+            "attribute":"CUN",
+            "description":"This skill represents a character’s ability to navigate the criminal underworld, be that finding a fence or informant, picking up on subtle references, or knowing the right way to approach a person or group and to open a conversation without coming across as a threat. Also governs a character’s knowledge of specific facts and information involving local criminals, organizations, and schemes.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success may be used to reduce the time or funds required to obtain an item, service or information sought."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to reveal additional rumors or alternative sources that can be used to find something."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to earn the character a semi-permanent contact on the street, someone to whom the character may turn or information regularly with a reasonable assurance of trust."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to represent a character letting slip details about themselves or the information they seek, that could be picked up by an adversary."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to cause the character to leave behind some evidence of their passing and though having no bearing on the success or failure of the Stealth check, some object, clue or information is left behind concerning the character’s identity and possibly their motive."
+              }
+            ]
+          },{
+            "name":"Survival",
+            "attribute":"CUN",
+            "description":"Recognizing the dangers of the natural environment, handling domesticated animals, finding food and shelter, and tracking a subject - whether game or bounty - are all determined using this skill.",
+            "results":[
+              {
+                "type":"success",
+                "description":"Additional success may be used to assist other characters in surviving. Alternatively, the character may choose to stockpile goods so that he may go a longer period of time between checks."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to gain an insight into the environment that makes future Survival checks easier. This might be a watering hole where prey is common, an abandoned cave that makes a good shelter, or a grove of fruit trees. When tracking, (1) Advantage can be spent to learn a detail about the target, its numbers, species, or how recently tracks were made."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to learn a vital clue about a tracked target; their destination, disposition or presence of prisoners or cargo. Survival can be used to handle animals, and Triumph may be spent to permanently predispose the target animal towards the character in a positive way, effectively earning the character a loyal companion."
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to represent the character spending vital resources, such as using their food for bait, or fuel for fire."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to inflict Critical Injuries or high levels of strain as characters succumb to the effects of the environment."
+              }
+            ]
+          },{
+            "name":"Vigilance",
+            "attribute":"WIL",
+            "description":"In combat situations for which the characters are unprepared, test this skill to determine Initiative order. Additionally, a Vigilance check can be made to see how well a character anticipated the situation and to determine whether a piece of gear or an environmental advantage might be available.",
+            "results":[
+              {
+                "type":"success",
+                "description":"In general all successes are used when calculating Initiative, however, in any other situation where extra Successes are available it may indicate that the character was particularly well-prepared for this sort of conflict and some important supply is readily accessible to them."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to notice an environmental factor that could play a key part in the relevant scene. This might be excellent cover, a convenient escape route, or something that could be used to distract a foe."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to allow the character to take an extra maneuver during the first round of combat (still uses two maneuvers max rule)"
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to cause the character to miss a key piece of information about the situation or the environment, blinding them to a possible advantage."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to make the character unable to perform more than a single maneuver during the first round of combat."
+              }
+            ]
+          },{
+            "name":"Vigilance",
+            "attribute":"WIL",
+            "description":"In combat situations for which the characters are unprepared, test this skill to determine Initiative order. Additionally, a Vigilance check can be made to see how well a character anticipated the situation and to determine whether a piece of gear or an environmental advantage might be available.",
+            "results":[
+              {
+                "type":"success",
+                "description":"In general all successes are used when calculating Initiative, however, in any other situation where extra Successes are available it may indicate that the character was particularly well-prepared for this sort of conflict and some important supply is readily accessible to them."
+              },
+              {
+                "type":"advantage",
+                "description":"Can be spent to notice an environmental factor that could play a key part in the relevant scene. This might be excellent cover, a convenient escape route, or something that could be used to distract a foe."
+              },
+              {
+                "type":"triumph",
+                "description":"Can be spent to allow the character to take an extra maneuver during the first round of combat (still uses two maneuvers max rule)"
+              },
+              {
+                "type":"threat",
+                "description":"Can be spent to cause the character to miss a key piece of information about the situation or the environment, blinding them to a possible advantage."
+              },
+              {
+                "type":"despair",
+                "description":"Can be spent to make the character unable to perform more than a single maneuver during the first round of combat."
+              }
+            ]
+          }
+        ]
+
+        $scope.critcalInjury = [
+          {
+            "severity":1,
+            "name":"Minor Nick",
+            "description":"The target suffers 1 strain."
+          },{
+            "severity":1,
+            "name":"Slowed Down",
+            "description":"The target can only act during the last allied Initiative slot on his next turn."
+          },{
+            "severity":1,
+            "name":"Sudden Jolt",
+            "description":"The target suffers 1 strain."
+          },{
+            "severity":1,
+            "name":"Distracted",
+            "description":"The target cannot perform a free manuever during his next turn."
+          },{
+            "severity":1,
+            "name":"Off-Balance",
+            "description":"Add Setback to his next check."
+          },{
+            "severity":1,
+            "name":"Discouraging Wound",
+            "description":"Flip one light side Destiny point to a dark side Destiny Point (reverse if NPC)."
+          },{
+            "severity":1,
+            "name":"Stunned",
+            "description":"The target is staggered until the end of his next turn."
+          },{
+            "severity":2,
+            "name":"Bowled Over",
+            "description":"The target is knocked prone and suffers 1 strain."
+          },{
+            "severity":2,
+            "name":"Head Ringer",
+            "description":"The target increases the difficulty of all Intellect and Cunning checks by one until the end of the encounter."
+          },{
+            "severity":2,
+            "name":"Fearsome Wound",
+            "description":"The target increases the difficulty of all Presence and Willpower checks by one until the end of the encounter."
+          },{
+            "severity":2,
+            "name":"Agonizing Wound",
+            "description":"The target increases the difficulty of all Brawn and Agility checks by one until the end of the encounter."
+          },{
+            "severity":2,
+            "name":"Slightly Dazed",
+            "description":"The target is disoriented until the end of the encounter."
+          },{
+            "severity":2,
+            "name":"Scattered Senses",
+            "description":"The target removes all Boost from skill checks until the end of the encounter."
+          },{
+            "severity":2,
+            "name":"Hamstrung",
+            "description":"The target loses his free manuever until the end of the encounter."
+          },{
+            "severity":2,
+            "name":"Overpowered",
+            "description":"The target leaves himself open, and his attacker may immediately make a free attack against him, using the exact same pool as the original attack."
+          },{
+            "severity":2,
+            "name":"Winded",
+            "description":"Until the end of the encounter, the target cannot voluntarily suffer strain to activate any abilities or gain additional manuevers."
+          },{
+            "severity":2,
+            "name":"Compromised",
+            "description":"Increase the difficulty all skill checks by one until the end of the encounter."
+          },{
+            "severity":3,
+            "name":"At the Brink",
+            "description":"The target suffers 1 strain each time he performs an action."
+          },{
+            "severity":3,
+            "name":"Crippled",
+            "description":"One of the the target's limbs (selected by the GM) is crippled until healed or replaced. Increase difficulty of all checks that require use of that limb by one."
+          },{
+            "severity":3,
+            "name":"Maimed",
+            "description":"One of the the target's limbs (selected by the GM) is permanently lost. Unless the target has a cybernetic replacement, the target cannot perform actions that would require the use of that limb. All other actions gain Setback."
+          },{
+            "severity":3,
+            "name":"Horrific Injury",
+            "description":"Randomly roll 1d10 to determine one of the target's characteristics. 1-3 for Brawn, 4-6 for Agility, 7 for Intellect, 8 for Cunning, 9 for Presence, 10 for Willpower. Until this critical injury is healed, treat that characteristic as one point lower."
+          },{
+            "severity":3,
+            "name":"Temporarily Lame",
+            "description":"Until this critical injury is healed, the target cannot perform more than one manuever during his turn."
+          },{
+            "severity":3,
+            "name":"Blinded",
+            "description":"The target can no longer see. Upgrade the difficulty of all checks twice. Upgrade the difficulty of Perception and Vigilance checks three times."
+          },{
+            "severity":3,
+            "name":"Knocked Senseless",
+            "description":"The target is staggered for the remainder of the encounter."
+          },{
+            "severity":4,
+            "name":"Gruesome Injury",
+            "description":"Randomly roll 1d10 to determine one of the target's characteristics. 1-3 for Brawn, 4-6 for Agility, 7 for Intellect, 8 for Cunning, 9 for Presence, 10 for Willpower. That characteristic is permanently reduced by one, to a minimum of one."
+          },{
+            "severity":4,
+            "name":"Gruesome Injury",
+            "description":"Every round, the target suffers 1 wound and 1 strain at the beginning of his turn. For every five wounds he suffers beyond his wound threshold, he suffers one additional Critical Injury. Roll on the chart, suffering the injury (if he suffers this result a second time due to this, roll again)."
+          },{
+            "severity":4,
+            "name":"The End is Nigh",
+            "description":"The target will die after the last Initiative slot during the next round."
+          },{
+            "severity":0,
+            "name":"Dead",
+            "description":"Complete, obliterated death."
           }
         ]
 
         $scope.selectedSkill = $scope.skills[0]
       });
     </script>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+      <symbol id="ability" viewBox="0 0 250 250">
+        <path d="M77.3 123.8L127 57.6l49.7 66.1-49.7 66.4-49.7-66.3z"/>
+      </symbol>
+      <symbol id="advantage" viewBox="0 0 250 250">
+        <path d="M179.7 134.5c1.2-.5 2.6-1.2 4.5-2.4 1.8-1.2 3.8-2.8 5.9-4.9 2.1-2.2 4.2-5 6.3-8.5l.3 2.2v4.6c-.5 3.9-1.7 7.5-3.4 10.5-1.7 3.2-3.7 5.8-5.9 8.2-2.1 2.4-4.5 4.3-6.8 5.9-2.4 1.6-4.6 2.9-6.6 3.9-2.1.9-3.7 1.7-5 2.1l-2.1.8-1.3.9-.3 1.7 1.4 1.2 3.4 1.2c1.4.3 2.9.4 4.6.3 1.7 0 3.4-.4 5.3-1.1-.9.9-2.2 2.1-3.8 3.5s-3.4 3-5.5 4.6c-2.1 1.7-4.6 3.3-7.4 5-2.6 1.7-5.7 3.3-8.9 4.7s-6.6 2.6-10.1 3.7c-3.4 1.1-6.7 1.8-9.6 2.5-2.9.5-5.4.9-7.4.9-2 .1-3-.1-3.3-.5v-.3h-.5l-.1.3c-.3.4-1.3.7-3.3.5-2 0-4.5-.4-7.4-.9-2.9-.7-6.2-1.4-9.6-2.5-3.5-1.1-6.8-2.2-10.1-3.7-3.2-1.4-6.2-3-8.8-4.7-2.8-1.7-5.3-3.3-7.5-5-2.1-1.6-3.9-3.2-5.5-4.6s-2.9-2.6-3.8-3.5c1.8.7 3.5 1.1 5.3 1.1 1.7.1 3.3 0 4.7-.3l3.4-1.2 1.4-1.2-.4-1.7-1.2-.9-2.1-.8c-1.3-.4-2.9-1.2-5-2.1-2-1.1-4.2-2.4-6.6-3.9-2.4-1.6-4.7-3.6-6.8-5.9-2.2-2.4-4.2-5-5.9-8-1.7-3.2-2.9-6.7-3.4-10.7V121l.3-2.2c2.1 3.5 4.2 6.3 6.3 8.5 2.1 2.1 4.1 3.7 5.9 4.9 1.7 1.2 3.2 1.8 4.3 2.4l2.1.7 2.1-1.1.1-2.5c-.8-1.4-1.6-2.9-2.5-4.3-.9-1.4-2-2.9-3-4.5-2.6-3.4-4.2-7.8-4.7-12.9-.7-5.1-.1-10.4 1.6-15.6 1.2-3.8 2.9-7 5.1-9.7 2.2-2.8 4.9-5.1 7.8-7.2 2.9-2 6-3.8 9.3-5.3s6.7-2.8 10-3.9h1.1c-3.7 2.2-6.4 4.6-8.4 7.2-2 2.6-3.3 5.1-3.9 7.8-.7 2.6-.8 5.3-.4 7.9.4 2.5.9 5 2 7.4 2.1 5.5 5.9 11.2 11.3 16.7-3.8 6.3-6 12.2-6.6 17.8-.5 5.7 0 10.7 1.7 15.4 1.6 4.6 3.8 8.8 6.8 12.6 3 3.7 6.2 7 9.3 9.6 3.3 2.8 6.2 4.9 8.9 6.6 2.8 1.6 4.6 2.6 5.7 3.2h1.4c1.1-.5 2.9-1.6 5.7-3.2 2.9-1.7 5.8-3.8 9.1-6.6 3.2-2.6 6.3-5.9 9.3-9.6 3-3.8 5.3-8 6.8-12.6 1.6-4.7 2.1-9.7 1.6-15.3-.5-5.5-2.8-11.4-6.6-17.9 5.4-5.5 9.2-11.2 11.3-16.7 1.1-2.4 1.6-4.9 2-7.4.4-2.6.3-5.3-.4-7.9-.7-2.6-2-5.1-3.9-7.8-2-2.6-4.7-5-8.4-7.2h1.2c3.3 1.2 6.6 2.5 9.9 3.9s6.4 3.3 9.3 5.3c2.9 2.1 5.5 4.5 7.8 7.2 2.2 2.8 3.9 5.9 5.1 9.7 1.7 5.1 2.2 10.4 1.6 15.5-.5 5.1-2.1 9.6-4.6 13-1.1 1.6-2.1 3-3 4.5-1.1 1.4-1.8 2.9-2.6 4.3l.3 2.5 2.1 1.1 1.7-.8zm-56-27.5c-2 0-3.8-.3-5.5-1.1-1.7-.8-3.3-1.8-4.6-3.2-1.3-1.3-2.4-2.9-3-4.7-.8-1.7-1.2-3.7-1.2-5.7s.4-3.9 1.2-5.7c.7-1.8 1.7-3.3 3-4.7 1.3-1.3 2.9-2.4 4.6-3.2 1.7-.7 3.5-1.1 5.5-1.1s3.8.4 5.5 1.1c1.7.8 3.3 1.8 4.6 3.2 1.3 1.4 2.4 2.9 3 4.7.8 1.7 1.2 3.7 1.2 5.7s-.4 3.9-1.2 5.7c-.7 1.8-1.7 3.4-3 4.7-1.3 1.3-2.9 2.4-4.6 3.2-1.7.9-3.5 1.1-5.5 1.1z"/>
+      </symbol>
+      <symbol id="boost" viewBox="0 0 250 250">
+        <path d="M177.2 72.7v104.5H72.8V72.7h104.4z"/>
+      </symbol>
+      <symbol id="challenge" viewBox="0 0 250 250">
+        <path d="M153.6 175.7H88.4l-32.6-56.4 32.6-56.5h65.2l32.6 56.5-32.6 56.4z"/>
+      </symbol>
+      <symbol id="darkside" viewBox="0 0 250 250">
+        <path d="M179.2 125c0 7.5-1.3 14.6-4.2 21.2-2.8 6.6-6.7 12.4-11.6 17.2-5 5-10.7 8.8-17.4 11.7-6.6 2.8-13.5 4.2-21 4.2s-14.6-1.4-21.2-4.2c-6.6-2.9-12.4-6.7-17.4-11.7-4.9-4.9-8.8-10.7-11.6-17.2-2.8-6.6-4.2-13.7-4.2-21.2s1.4-14.5 4.2-21.2c2.8-6.6 6.7-12.4 11.6-17.2 5-5 10.8-8.8 17.4-11.7 6.6-2.8 13.7-4.2 21.2-4.2s14.5 1.4 21 4.2c6.7 2.9 12.4 6.7 17.4 11.7 4.9 4.9 8.8 10.7 11.6 17.2 2.9 6.7 4.2 13.7 4.2 21.2z"/>
+      </symbol>
+      <symbol id="despair" viewBox="0 0 250 250">
+        <path d="M174.8 91c3.7 7.4 5.7 15.8 5.7 24.6 0 29.6-23.1 53.8-52.3 55.4-1.4 6.3-2.5 12.6-3.2 19.1-.7-6.4-1.7-12.8-3.2-19.1-29.2-1.6-52.3-25.8-52.3-55.4 0-8.9 2-17.2 5.7-24.7-4.5-4.2-9.3-8.2-14.3-11.8 5.7 2.5 11.4 4.7 17.4 6.6C88.1 70.2 105.4 60 125 60c19.7 0 36.9 10.3 46.8 25.6 5.9-1.8 11.7-3.9 17.4-6.6-5 3.7-9.9 7.8-14.4 12zm-54.5 73.6c-.8-2.5-1.4-5.1-2.4-7.6-3.6-10.5-8-20.5-13.5-30-5.7-9.5-12.1-18.1-19.3-26.3L80 95.4c-2.6 6.2-4.2 12.9-4.2 20.1-.1 25.7 19.5 46.8 44.5 49.1zM84.5 87.5c2.4.7 4.7 1.2 7.2 1.7 10.7 2.5 21.7 3.7 33.3 3.7 11.6 0 22.6-1.2 33.3-3.6 2.5-.5 4.9-1.2 7.2-1.8-8.8-12.8-23.7-21.2-40.5-21.2s-31.6 8.4-40.5 21.2zm89.8 28.1c0-7.1-1.6-13.9-4.2-20-1.7 1.7-3.4 3.4-5.1 5.3-7.2 8.2-13.7 16.8-19.3 26.3-5.5 9.3-10 19.3-13.5 29.8-.9 2.5-1.6 5.1-2.4 7.6 24.9-2.3 44.5-23.4 44.5-49z"/>
+      </symbol>
+      <symbol id="difficulty" viewBox="0 0 250 250">
+        <path d="M77.3 123.8L127 57.6l49.7 66.1-49.7 66.4-49.7-66.3z"/>
+      </symbol>
+      <symbol id="failure" viewBox="0 0 250 250">
+        <path d="M189.2 69.6c-8.8 6.4-16.8 13.7-24.2 21.8-7.2 8-13.7 16.7-19.3 26.2-5.5 9.3-10 19.3-13.5 30-3.5 10.6-5.9 21.6-7.1 32.9-1.2-11.3-3.5-22.2-7.1-32.9-3.6-10.7-8-20.6-13.5-30.1-5.7-9.3-12.1-18.1-19.3-26.2-7.4-8.2-15.4-15.4-24.2-21.7 9.9 4.3 20.1 7.8 30.9 10.1 10.7 2.4 21.7 3.6 33.3 3.6 11.6 0 22.6-1.2 33.3-3.6 10.4-2.4 20.7-5.7 30.7-10.1z"/>
+      </symbol>
+      <symbol id="lightside" viewBox="0 0 250 250">
+        <path d="M187.2 125.1c0 8.4-1.7 16.6-4.9 24.2-3.2 7.5-7.6 14.1-13.3 19.7-5.7 5.7-12.2 10.1-19.9 13.3-7.5 3.3-15.6 5-24.2 5-8.5 0-16.7-1.7-24.2-5-7.6-3.2-14.2-7.6-19.9-13.3-5.7-5.7-10.1-12.2-13.3-19.7-3.2-7.6-4.9-15.8-4.9-24.2 0-8.5 1.7-16.7 4.9-24.3C71 93.3 75.4 86.7 81 81.1c5.7-5.7 12.2-10.1 19.9-13.3 7.5-3.3 15.6-4.9 24.2-4.9 8.5 0 16.7 1.6 24.2 4.9 7.6 3.2 14.2 7.6 19.9 13.3 5.5 5.7 10 12.2 13.3 19.7 3 7.6 4.7 15.8 4.7 24.3zm-7.9 0c0-7.5-1.4-14.6-4.2-21.2-2.9-6.6-6.7-12.4-11.7-17.4-4.9-4.9-10.7-8.7-17.2-11.6-6.6-2.8-13.7-4.2-21.2-4.2s-14.5 1.4-21.2 4.2c-6.6 2.9-12.4 6.7-17.2 11.6-5 5-8.8 10.8-11.7 17.4-2.8 6.6-4.2 13.7-4.2 21.2s1.4 14.5 4.2 21.2c2.9 6.6 6.7 12.4 11.7 17.2 4.9 5 10.7 8.8 17.2 11.6 6.7 2.9 13.7 4.3 21.2 4.3s14.6-1.4 21.2-4.3c6.6-2.8 12.4-6.6 17.2-11.6 5-4.9 8.8-10.7 11.7-17.2 2.8-6.7 4.2-13.7 4.2-21.2z"/>
+      </symbol>
+      <symbol id="proficiency" viewBox="0 0 250 250">
+        <path d="M153.6 175.7H88.4l-32.6-56.4 32.6-56.5h65.2l32.6 56.5-32.6 56.4z"/>
+      </symbol>
+      <symbol id="setback" viewBox="0 0 250 250">
+        <path d="M177.2 72.7v104.5H72.8V72.7h104.4z"/>
+      </symbol>
+      <symbol id="success" viewBox="0 0 250 250">
+        <path d="M141.4 100.6l35.8-9.7-21.7 30.4 30 18.1-33.9 5.4 6.4 40.6-30.5-30.2-31.8 32.7 7-42.7-34.5-5.7 33.7-17.8-37.4-40.8 52.3 25 10.7-43.8 13.9 38.5zm2.3 57.3l-3.4-20.9 18.4-2.9-16.9-10.1 12.1-17-18.8 5.1-6.2-17.1-5.8 23.3-21.8-10.3 14.9 16.3-19.7 10.5 17.6 2.8-3.6 21.6 17-17.2 16.2 15.9z"/>
+      </symbol>
+      <symbol id="threat" viewBox="0 0 250 250">
+        <path d="M82.4 118.2H63.9l24.7-42.9 9.6 16.3-15.8 26.6zm0 13.5l15.5 26.6-9.3 16.3-24.7-42.9h18.5zm58.1-33.4l15.1 26.7-15.1 26.7h-31L94.2 125l15.3-26.7h31zm-31-13.4l-9.3-16.3h49.6l-9.2 16.3h-31.1zm31 80.1l9.2 16.4h-49.6l9.3-16.4h31.1zm2.8-40l-9.1-16h-18.5l-9.1 16 9.1 15.9h18.5l9.1-15.9zm24-6.8l-15.5-26.6 9.6-16.3 24.7 42.9h-18.8zm0 13.5h18.8l-24.7 42.9-9.6-16.3 15.5-26.6z"/>
+      </symbol>
+      <symbol id="triumph" viewBox="0 0 250 250">
+        <path d="M173.7 150.6c-2 5.7-4.9 10.9-8.7 15.5-3.8 4.6-8.2 8.4-13.3 11.6l5.1 6.8-7.2-5.4c-3.3 2-6.8 3.6-10.5 4.7-3.7 1.2-7.6 2-11.6 2.5v8.2l-11.6 3.3v-11.4c-7-.8-13.4-2.8-19.5-5.9-6-3.2-11.3-7.2-15.8-12.1-4.5-5-8-10.7-10.7-17-2.5-6.3-3.8-13.1-3.8-20.4 0-7.4 1.3-14.2 4.1-20.6 2.6-6.6 6.3-12.2 11-17.2 4.6-5 10.1-8.9 16.4-12.1 6.2-3 13-4.9 20.2-5.3l.8-23.7h5.8l.8 23.7c7.2.4 14.1 2.2 20.4 5.3 6.3 3.2 11.8 7.1 16.4 12.1 4.7 5 8.4 10.7 11 17.2 2.8 6.4 4.1 13.3 4.1 20.6 0 6.3-.9 12-2.8 17.2l9.1 1.4-9.7 1zm-55.9-68.5c-6.3.5-12.2 2.1-17.8 4.9-5.4 2.6-10.1 6.3-14.2 10.7-4.2 4.5-7.4 9.5-9.7 15.3-2.4 5.7-3.6 11.8-3.6 18.1s1.2 12.4 3.4 17.9c2.2 5.7 5.3 10.7 9.2 15.1 3.8 4.3 8.5 7.9 13.8 10.7 5.3 2.8 10.9 4.6 17 5.4V161l-.7-2.9-19.1 9.7 13-18.7-30-20.2 36.4 9.7 2.3-56.5zm50.5 65.1c2-5.1 2.9-10.5 2.9-16.2 0-6.4-1.2-12.6-3.5-18.3-2.4-5.8-5.5-10.8-9.6-15.1-4.1-4.5-8.9-8-14.5-10.7-5.5-2.8-11.4-4.3-17.9-4.9l2 51.7 25.8-18.9-18.9 26.8 33.7 5.6zm-40.7 32.9c2.9-.4 5.8-.9 8.5-1.8 2.8-.8 5.5-2 8-3.3l-16.6-12.8v17.9zm20.5-7.2c4.1-2.6 7.8-5.8 10.9-9.5 3.3-3.7 5.9-7.6 7.9-12.1l-32.9 2.6 14.1 19z"/>
+      </symbol>
+      <symbol id="skills" viewBox="0 0 250 250">
+      </symbol>
+      <symbol id="manuevers" viewBox="0 0 250 250">
+      </symbol>
+      <symbol id="combat" viewBox="0 0 250 250">
+      </symbol>
+    </svg>
   </body>
 </html>
