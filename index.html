@@ -12,7 +12,8 @@
       body {
         position: absolute;
         top: 0; bottom: 0; left: 0; right: 0;
-        background: #f2f2f2;
+        background: #ecf0f1;
+        -webkit-font-smoothing: antialiased;
       }
 
       #nav {
@@ -32,28 +33,27 @@
         overflow-y: scroll;
       }
 
-      .title{
-        color: #52644a;
+      .title {
+        color: #2c3e50;
       }
 
-      .thead-inverse th {
-        background-color: #52644a;
+      th {
+        color: #c0392b;
+        font-weight: 500;
       }
 
       .table-heading {
-        margin: 0px;
+        margin: 0;
         padding: 1rem;
-        background-color: #52644a;
-        color: #fff;
-        text-align: center;
+        color: #c0392b;
       }
 
       .heading {
-        color: #761213;
+        color: #c0392b;
       }
 
       .subheading {
-        color: #876d22;
+        color: #34495e;
       }
 
       .content-item-list-group {
@@ -71,24 +71,12 @@
         margin:0px !important;
       }
 
-      .table-striped td, .table-striped th {
-        border: none;
-      }
-
-      .table-striped tbody tr:nth-of-type(even) {
-        background-color: #fff
-      }
-
-      .table-striped tbody tr:nth-of-type(odd) {
-        background-color: #F5F5F5;
-      }
-
       .table-inner {
-        padding: 0px !important;
+        padding: 0 !important;
       }
 
       .table-inner table {
-        margin-bottom: 0px;
+        margin-bottom: 0;
       }
 
       .table-inner table td {
@@ -96,7 +84,7 @@
       }
 
       .table-inner tbody tr:nth-of-type(odd) {
-          background-color: #F5F5F5;;
+          background-color: #ecf0f1;;
       }
 
       .table-inner tbody tr:nth-of-type(even) {
@@ -111,14 +99,14 @@
       }
 
       .nav-pills {
-        background-color: #f5f5f5;
+        background-color: #34495e;
         min-width: 200px;
-        border-right: 1px solid #ebebeb;
+        border-right: 1px solid #2c3e50;
       }
 
       .nav-pills .nav-item .nav-link {
         padding: 1rem;
-        color: #888888;
+        color: #95a5a6;
         border-radius: 0;
       }
 
@@ -129,26 +117,25 @@
       }
 
       .nav-pills .nav-item .nav-link svg {
-        fill: #888888;
+        fill: #95a5a6;
       }
 
       .nav-pills .nav-item .nav-link:hover {
-        background-color: #ebebeb;
-        color: #000;
+        color: #fff;
       }
 
       .nav-pills .nav-item .nav-link:hover svg {
-        fill: #000;
+        fill: #fff;
       }
 
       .nav-pills .nav-link.active, .show>.nav-pills .nav-link {
-        color: #000;
+        color: #ecf0f1;
         font-weight: 500;
-        background-color: #ebebeb;
+        background-color: #2c3e50;
       }
 
       .nav-pills .nav-link.active svg, .show>.nav-pills .nav-link svg {
-        fill: #761213 !important;
+        fill: #ecf0f1 !important;
       }
 
       .table td, .table th {
@@ -163,33 +150,46 @@
         display: block;
       }
 
+      .dice-symbols {
+        display: flex;
+        align-items: center;
+      }
+
+      .dice-symbols .dice-symbol {
+        display: inline-block;
+      }
+
+      .dice-symbols .dice-symbol + .dice-symbol {
+        margin-left: -10px;
+      }
+
       .dice-symbol {
         flex-grow: 0;
         flex-shrink: 0;
       }
 
       .ability {
-        fill: #48a23e;
+        fill: #27ae60;
       }
 
       .proficiency {
-        fill: #ffe800;
+        fill: #f1c40f;
       }
 
       .boost {
-        fill: #a3d7f4;
+        fill: #3498db;
       }
 
       .difficulty {
-        fill: #522380;
+        fill: #8e44ad;
       }
 
       .challenge {
-        fill: #e31837;
+        fill: #e74c3c;
       }
 
       .setback {
-        fill: #000000;
+        fill: #2c3e50;
       }
     </style>
   </head>
@@ -198,7 +198,7 @@
       <ul id="nav" class="nav nav-pills flex-row flex-md-column">
         <li class="nav-item">
           <a class="nav-link d-flex justify-content-start align-items-center active" data-toggle="tab" href="#skills" role="tab" aria-controls="skills">
-            <svg class="dice-symbol" width="60" height="60">
+            <svg class="dice-symbol" width="40" height="40">
               <use xlink:href="#skills-icon" />
             </svg>
             Skills
@@ -206,7 +206,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link d-flex justify-content-start align-items-center" data-toggle="tab" href="#maneuvers" role="tab" aria-controls="maneuvers">
-            <svg class="dice-symbol" width="60" height="60">
+            <svg class="dice-symbol" width="40" height="40">
               <use xlink:href="#maneuvers-icon" />
             </svg>
             Maneuvers
@@ -214,7 +214,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link d-flex justify-content-start align-items-center" data-toggle="tab" href="#combat" role="tab" aria-controls="combat">
-            <svg class="dice-symbol" width="60" height="60">
+            <svg class="dice-symbol" width="40" height="40">
               <use xlink:href="#weapons-icon" />
             </svg>
             Combat
@@ -255,8 +255,8 @@
                 <p>During combat, a character can use the Aim maneuver to steady a weapon or line up a hit before attacking, granting a bonus to his next combat check. A character only gains the benefit of aiming if he remains in his current position and does not perform any additional maneuvers or actions before his next combat check. Any damage that exceeds the character's soak also negates the benefit of aiming.</p>
                 <p>Aiming provides the character with one of the two following bonuses:</p>
                 <ul>
-                  <li>Gain Boost on the next combat check. If the character spends two consecutive maneuvers aiming, he gains Boost Boost on the next combat check.</li>
-                  <li>Target a specific item carried by the target, or a specific part of the target This could allow the character to attempt to strike or shoot a weapon from his opponent's hand, for example, or target an opponent's limb to cripple him. If the character spends one maneuver aiming to do this, his next combat check suffers Setback Setback If he spends two consecutive maneuvers aiming, the combat check suffers Setback instead</li>
+                  <li><strong>Gain Boost on the next combat check.</strong> If the character spends two consecutive maneuvers aiming, he gains Boost Boost on the next combat check.</li>
+                  <li><strong>Target a specific item carried by the target, or a specific part of the target.</strong> This could allow the character to attempt to strike or shoot a weapon from his opponent's hand, for example, or target an opponent's limb to cripple him. If the character spends one maneuver aiming to do this, his next combat check suffers Setback Setback If he spends two consecutive maneuvers aiming, the combat check suffers Setback instead</li>
                 </ul>
               </li>
               <li class="list-group-item" ng-if="theater === 'ground'">
@@ -309,201 +309,304 @@
           </div>
         </div>
         <div class="tab-pane" id="combat">
-          <div class="content-item-list-group">
-            <ul class="list-group">
-              <li class="list-group-item">
-                <h5 class="mt-2 heading">Spending Dice in Combat</h5>
-              </li>
-              <li class="list-group-item d-flex justify-content-start align-items-center">
-                <svg class="dice-symbol" width="30" height="30">
-                  <use ng-href="#advantage-icon" xlink:href="" />
-                </svg>
-                <div class="pl-2">
-                  <ul>
-                    <li>Recover 1 Strain (this option may be selected more than once)</li>
-                    <li>Add Boost to the next allied active character's check</li>
-                    <li>Notice a single important point in teh ongoing conflict, such as the location of a blast door's control panel or a weak poit on an attack speeder</li>
-                    <li>Inflict a Critical injury with a successful attack that deals damage past soak (Advantage cost may vary)</li>
-                    <li>Activate a weapon quality (Advantage cost may vary)</li>
-                  </ul>
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-start align-items-center">
-                <svg class="dice-symbol" width="30" height="30">
-                  <use ng-href="#advantage-icon" xlink:href="" />
-                </svg>
-                <svg class="dice-symbol" style="margin-left: -10px;" width="30" height="30">
-                  <use ng-href="#advantage-icon" xlink:href="" />
-                </svg>
-                <div class="pl-2">
-                  <ul>
-                    <li>Perform an immediate free manuever that does not exceed the two manuever per turn limit</li>
-                    <li>Add Setback to the targeted character's next check</li>
-                    <li>Add Boost to any allied character's next check, including the active character</li>
-                  </ul>
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-start align-items-center">
-                <svg class="dice-symbol" width="30" height="30">
-                  <use ng-href="#advantage-icon" xlink:href="" />
-                </svg>
-                <svg class="dice-symbol" style="margin-left: -10px;" width="30" height="30">
-                  <use ng-href="#advantage-icon" xlink:href="" />
-                </svg>
-                <svg class="dice-symbol" style="margin-left: -10px;" width="30" height="30">
-                  <use ng-href="#advantage-icon" xlink:href="" />
-                </svg>
-                <div class="pl-2">
-                  <ul>
-                    <li>Negate the targeted enemy’s defensive bonuses (such as the defense gained from cover, equipment, or performing the Guarded Stance maneuver) until the end of the current round.</li>
-                    <li>Ignore penalizing environmental effects until the end of the active character’s next turn.</li>
-                    <li>When dealing damage to a target, have the attack disable the opponent or one piece of gear rather than dealing wounds or strain. This could include hobbling him temporarily with a shot to the leg, or disabling his climbing gear. The effects can be similar to a Critical Wound but are only temporary, not too excessive and agreed upon by the GM.</li>
-                    <li>Gain +1 Melee or Ranged Defense until the end of the character’s next turn.</li>
-                    <li>Force the target to drop a melee or ranged weapon it is wielding.</li>
-                  </ul>
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-start align-items-center">
-                <svg class="dice-symbol" width="30" height="30">
-                  <use ng-href="#triumph-icon" xlink:href="" />
-                </svg>
-                <div class="pl-2">
-                  <ul>
-                    <li>Upgrade the difficulty of the targeted character's next check.</li>
-                    <li>Upgrade any allied character's next check, including the current active character.</li>
-                    <li>Do something vital, such as shooting the controls to the nearby blast doors to seal them shut.</li>
-                  </ul>
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-start align-items-center">
-                <svg class="dice-symbol" width="30" height="30">
-                  <use ng-href="#triumph-icon" xlink:href="" />
-                </svg>
-                <svg class="dice-symbol" style="margin-left: -10px;" width="30" height="30">
-                  <use ng-href="#triumph-icon" xlink:href="" />
-                </svg>
-                <div class="pl-2">
-                  <ul>
-                    <li>When dealing damage to a target, have the attack destroy a piece of equipment the target is using, such 1 as blowing up his blaster or destroying a personal shield generator .</li>
-                  </ul>
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-start align-items-center">
-                <svg class="dice-symbol" width="30" height="30">
-                  <use ng-href="#threat-icon" xlink:href="" />
-                </svg>
-                <div class="pl-2">
-                  <ul>
-                    <li>The active character suffers 1 strain (this option may be selected more than once)</li>
-                    <li>The active character loses the benefits of a prior maneuver (such as from taking cover or assuming a Guarded Stance) until he performs the maneuver again</li>
-                  </ul>
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-start align-items-center">
-                <svg class="dice-symbol" width="30" height="30">
-                  <use ng-href="#threat-icon" xlink:href="" />
-                </svg>
-                <svg style="margin-left: -10px" class="dice-symbol" width="30" height="30">
-                  <use ng-href="#threat-icon" xlink:href="" />
-                </svg>
-                <div class="pl-2">
-                  <ul>
-                    <li>An opponent may immediately perform one free maneuver in response to the active character's check.</li>
-                    <li>Add Boost to the targeted character's next check.</li>
-                    <li>The active character or an allied character suffers Setback on his next action.</li>
-                  </ul>
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-start align-items-center">
-                <svg class="dice-symbol" width="30" height="30">
-                  <use ng-href="#threat-icon" xlink:href="" />
-                </svg>
-                <svg style="margin-left: -10px" class="dice-symbol" width="30" height="30">
-                  <use ng-href="#threat-icon" xlink:href="" />
-                </svg>
-                <svg style="margin-left: -10px" class="dice-symbol" width="30" height="30">
-                  <use ng-href="#threat-icon" xlink:href="" />
-                </svg>
-                <div class="pl-2">
-                  <ul>
-                    <li>The active character falls prone</li>
-                    <li>The active character grants the enemy a significant advantage in the ongoing encounter, such as accidentally blasting the controls to a bridge he was planning to use for his escape.</li>
-                  </ul>
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-start align-items-center">
-                <svg class="dice-symbol" width="30" height="30">
-                  <use ng-href="#despair-icon" xlink:href="" />
-                </svg>
-                <div class="pl-2">
-                  <ul>
-                    <li>The character's ranged weapon immediately runs out of ammunition and may not be used for the remainder of the encounter.</li>
-                    <li>Upgrade the difficulty of an allied character's next check, including the current active character.</li>
-                    <li>The tool or melee weapon the character is using becomes damaged</li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
           <div class="content-item-table">
-            <h5 class="table-heading">Range Bands</h5>
-            <table class="table table-striped">
-              <thead class="thead-inverse">
+            <h5 class="table-heading">Spending Dice in Combat</h5>
+            <table class="table table-bordered">
+              <thead>
                 <tr>
-                  <th>Range Band</th>
-                  <th>Difficulty</th>
+                  <th>Dice</th>
+                  <th>Result</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Engaged</td>
-                  <td class="table-inner">
-                    <table class="table table-striped">
-                      <tbody>
-                        <tr>
-                          <td class="d-flex align-items-center">
-                            Melee or Brawl:<svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="d-flex align-items-center">
-                            Ranged (Light):<svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="d-flex align-items-center">
-                            Ranged (Heavy):<svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <td>
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#advantage-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
+                  <td>
+                    <ul>
+                      <li>Recover 1 Strain (this option may be selected more than once)</li>
+                      <li>Add Boost to the next allied active character's check</li>
+                      <li>Notice a single important point in teh ongoing conflict, such as the location of a blast door's control panel or a weak poit on an attack speeder</li>
+                      <li>Inflict a Critical injury with a successful attack that deals damage past soak (Advantage cost may vary)</li>
+                      <li>Activate a weapon quality (Advantage cost may vary)</li>
+                    </ul>
                   </td>
                 </tr>
                 <tr>
+                  <td>
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#advantage-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#advantage-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
+                  <td>
+                    <ul>
+                      <li>Perform an immediate free manuever that does not exceed the two manuever per turn limit</li>
+                      <li>Add Setback to the targeted character's next check</li>
+                      <li>Add Boost to any allied character's next check, including the active character</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#advantage-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#advantage-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#advantage-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
+                  <td>
+                    <ul>
+                      <li>Negate the targeted enemy’s defensive bonuses (such as the defense gained from cover, equipment, or performing the Guarded Stance maneuver) until the end of the current round.</li>
+                      <li>Ignore penalizing environmental effects until the end of the active character’s next turn.</li>
+                      <li>When dealing damage to a target, have the attack disable the opponent or one piece of gear rather than dealing wounds or strain. This could include hobbling him temporarily with a shot to the leg, or disabling his climbing gear. The effects can be similar to a Critical Wound but are only temporary, not too excessive and agreed upon by the GM.</li>
+                      <li>Gain +1 Melee or Ranged Defense until the end of the character’s next turn.</li>
+                      <li>Force the target to drop a melee or ranged weapon it is wielding.</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#triumph-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
+                  <td>
+                    <ul>
+                      <li>Upgrade the difficulty of the targeted character's next check.</li>
+                      <li>Upgrade any allied character's next check, including the current active character.</li>
+                      <li>Do something vital, such as shooting the controls to the nearby blast doors to seal them shut.</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#triumph-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#triumph-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
+                  <td>
+                    <ul>
+                      <li>When dealing damage to a target, have the attack destroy a piece of equipment the target is using, such 1 as blowing up his blaster or destroying a personal shield generator .</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#threat-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
+                  <td>
+                    <ul>
+                      <li>The active character suffers 1 strain (this option may be selected more than once)</li>
+                      <li>The active character loses the benefits of a prior maneuver (such as from taking cover or assuming a Guarded Stance) until he performs the maneuver again</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#threat-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#threat-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
+                  <td>
+                    <ul>
+                      <li>An opponent may immediately perform one free maneuver in response to the active character's check.</li>
+                      <li>Add Boost to the targeted character's next check.</li>
+                      <li>The active character or an allied character suffers Setback on his next action.</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#threat-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#threat-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#threat-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
+                  <td>
+                    <ul>
+                      <li>The active character falls prone</li>
+                      <li>The active character grants the enemy a significant advantage in the ongoing encounter, such as accidentally blasting the controls to a bridge he was planning to use for his escape.</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol" width="30" height="30">
+                        <use ng-href="#despair-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
+                  <td>
+                    <ul>
+                      <li>The character's ranged weapon immediately runs out of ammunition and may not be used for the remainder of the encounter.</li>
+                      <li>Upgrade the difficulty of an allied character's next check, including the current active character.</li>
+                      <li>The tool or melee weapon the character is using becomes damaged</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="content-item-table">
+            <h5 class="table-heading">Range Bands</h5>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Range Band</th>
+                  <th colspan="2">Difficulty</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="3">Engaged</td>
+                  <td>
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
+                  <td>Melee or Brawl</td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
+                  <td>Ranged (Light)</td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
+                  <td>Ranged (Heavy)</td>
+                </tr>
+                <tr>
                   <td>Short</td>
-                  <td class="d-flex align-items-center"><svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg></td>
+                  <td colspan="2">
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>Medium</td>
-                  <td class="d-flex align-items-center"><svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg></td>
+                  <td colspan="2">
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>Long</td>
-                  <td class="d-flex align-items-center"><svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg></td>
+                  <td colspan="2">
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>Extreme</td>
-                  <td class="d-flex align-items-center"><svg class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg><svg style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg></td>
+                  <td colspan="2">
+                    <div class="dice-symbols">
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="content-item-table">
             <h5 class="table-heading">Critical Hits</h5>
-            <table class="table table-striped">
-              <thead class="thead-inverse">
+            <table class="table table-bordered">
+              <thead>
                 <tr>
-                  <th>d100</th>
+                  <th width="100">d100</th>
                   <th>Severity</th>
                   <th>Result</th>
                 </tr>
@@ -511,12 +614,24 @@
               <tbody>
                 <tr ng-repeat="crit in critcalInjury">
                   <td>{{($index * 5) + 1}} - {{($index * 5) + 5}}</td>
-                  <td class="d-flex align-items-center">
-                    <svg ng-if="crit.severity > 0" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg>
-                    <svg ng-if="crit.severity > 1" style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg>
-                    <svg ng-if="crit.severity > 2" style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg>
-                    <svg ng-if="crit.severity > 3" style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg>
-                    <svg ng-if="crit.severity > 4" style="margin-left: -15px" class="dice-symbol difficulty" width="30" height="30"><use ng-href="#difficulty-icon" xlink:href="" /></svg>
+                  <td>
+                    <div class="dice-symbols">
+                      <svg ng-if="crit.severity > 0" class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg ng-if="crit.severity > 1" class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg ng-if="crit.severity > 2" class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg ng-if="crit.severity > 3" class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                      <svg ng-if="crit.severity > 4" class="dice-symbol difficulty" width="30" height="30">
+                        <use ng-href="#difficulty-icon" xlink:href="" />
+                      </svg>
+                    </div>
                   </td>
                   <td><strong>{{crit.name}}:</strong> {{crit.description}}</td>
                 </tr>
