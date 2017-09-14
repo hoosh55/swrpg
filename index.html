@@ -12,7 +12,7 @@
       body {
         position: absolute;
         top: 0; bottom: 0; left: 0; right: 0;
-        background-color: #FAFAFA;
+        background: #f2f2f2;
       }
 
       #nav {
@@ -223,7 +223,7 @@
                 <select class="form-control heading skill-select" ng-model="selectedSkill" ng-options="skill as skill.name for skill in skills track by skill.name"></select>
                 <h6 ng-if="selectedSkill.attribute" class="m-0 pl-2 small heading">[{{selectedSkill.attribute}}]</h6>
               </li>
-              <li class="list-group-item">
+              <li class="list-group-item" ng-if="selectedSkill.description">
                 {{selectedSkill.description}}
               </li>
               <li class="list-group-item d-flex justify-content-start align-items-center" ng-repeat="result in selectedSkill.results">
